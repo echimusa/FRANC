@@ -1,0 +1,2 @@
+# FRANC
+FRANC is a unified framework for multi-way local ancestry inference, FRANC, integrating eight existing state-of-the-art local ancestry deconvolution tools. FRANC is an adaptable, expandable and portable tool that manipulates tool-specific inputs, deconvolutes ancestry and standardizes tool-specific results. To facilitate both medical and population genetics studies, FRANC requires convenient and easy to manipulate input files and allows users to choose output formats to ease their use in further potential local ancestry deconvolution applications.
