@@ -32,7 +32,7 @@ Home-page: http://web.cbio.uct.ac.za/ITGOM/franc
 Author: Gaston K Mazandu, Ephifania Geza, 
         Nicola J. Mulder, Emile R. Chimusa
         
-Maintainer-email: kuzamunu@aims.ac.za 
+Maintainer-email: ecimusa@gmail.com and kuzamunu@aims.ac.za 
 
 License: Copyright (c) 2015 Building Genomics-Bioinformatics 
                             Tool Project@Authors
@@ -148,7 +148,9 @@ Description:
 	from the FRANC Home-page and extract all files as follows: 
 
         tar -xzf franc.tar.gz
-
+	or
+	git clone https://github.com/echimusa/FRANC.git
+	
 	It is worth mentioning that FRANC is a portable python package.
 	So, the user is required to move in the franc_interface folder, 
 	containing the franc.py python module to run different multi-
@@ -156,7 +158,7 @@ Description:
 	franc.tar.gz, please move to the franc_interface directory, 
 	using the following terminal command::
 	     
-	     	cd franc/franc_interface. 
+	     	cd FRANC/Interface. 
 	
 	
 	The FRANC interface is free to use under GNU General Public 
