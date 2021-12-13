@@ -1,0 +1,7 @@
+genotypename:	%s%s.geno
+snpname:		%s%s.snp
+indivname:		%s%s.ind
+outputformat:	PED
+genotypeoutname:		%s%s.ped
+snpoutname:				%s%s.pedsnp
+indivoutname:			%s%s.pedind

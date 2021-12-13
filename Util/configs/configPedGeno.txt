@@ -1,0 +1,7 @@
+genotypename:	%s/%s/%s.%d.ped
+snpname:		%s/%s/%s.%d.map
+indivname:		%s/%s/%s.%d.ped
+outputformat:	EIGENSTRAT
+genotypeoutname:	%s/%s/%s/%s.%d.geno
+snpoutname:			%s/%s/%s/%s.%d.snp
+indivoutname:		%s/%s/%s/%s.ind

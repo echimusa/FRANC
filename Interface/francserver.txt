@@ -1,0 +1,27 @@
+#!/usr/bin/python
+# -*- coding: utf8 -*-
+
+from __future__ import print_function
+import os, sys, subprocess, fileinput, gzip, time, datetime
+sys.path.append("%s")
+from franc import franc
+from convertall import *
+
+try:
+	from itertools import izip
+except:
+	izip = zip
+
+if __name__=='__main__':
+	fp = open("%s")
+	parameters = {}
+	for p in fp:
+		tp = [s.strip() for s in p.split('=')]
+		try:
+			parameters[tp[0].strip()] = eval(tp[1].strip())
+		except:
+			parameters[tp[0].strip()] = tp[1].strip() 
+	fp.close()
+	
+	RunServer = franc(parameters)
+	RunServer.run()

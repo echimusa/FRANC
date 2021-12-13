@@ -1,0 +1,202 @@
+<html>
+<head>
+<title>LAMP visualizer</title>
+
+
+<script language="JavaScript">
+var avgw;  // identifies the width
+var avgh;  // identifies the height
+var avgorig_w;  // placeholder for the original img width
+var avgorig_h;  // placeholder for the original img height
+var avgstate=0;  // keeps a count in case an img is clicked more than once
+
+function zoomavg (event){
+	if (avgstate == 3) {
+		return;
+	}
+	avgstate++;
+	if (avgstate == 1) {
+		avgorig_w = img1.width;
+	}
+	w = img1.width;
+
+	pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("avg").offsetLeft;
+	
+	scrollLeft = avg.scrollLeft;
+	img1.style.width = w*chg;
+		
+	avg.scrollLeft = (pos_x + scrollLeft) * chg - pos_x;
+ 
+   	document.pointform.form_w.value = avg.scrollLeft;
+    document.pointform.form_u.value = pos_x;
+}
+
+function zoomoutavg (event){
+	if ( avgstate == 0 ) {
+		return;
+	}
+	avgstate--;
+	if (avgstate == 1) {
+		avgorig_w = img1.width;
+	}
+	w = img1.width;
+
+	pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("avg").offsetLeft;
+	
+	scrollLeft = avg.scrollLeft;
+	img1.style.width = w/chg;
+		
+	avg.scrollLeft = (pos_x + scrollLeft) / chg - pos_x;
+ 
+   	document.pointform.form_w.value = avg.scrollLeft;
+    document.pointform.form_u.value = pos_x;
+}
+
+function zoomchr (event) {
+	var imgs, i;
+
+	pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("chr").offsetLeft;
+	pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("chr").offsetTop;
+	bigger (pos_x, pos_y);	
+}
+
+var chg = 1.5;  // you can change this number to alter the amount of magnification
+var w;  // identifies the width
+var h;  // identifies the height
+var orig_w;  // placeholder for the original img width
+var orig_h;  // placeholder for the original img height
+var state=0;  // keeps a count in case an img is clicked more than once
+l = 0;
+t = 0;
+
+function bigger(pos_x, pos_y) {
+	// this function increases the size of the image
+	curr_Img = img0;
+	curr_Img1 = img2;
+	if ( state == 3 ) {
+		return;
+	}
+	state++;
+	if (state == 1) {
+		orig_w = curr_Img.width;
+		orig_h = curr_Img.height;
+	}
+	w = curr_Img.width;
+	h = curr_Img.height;
+
+	
+	scrollTop = chr.scrollTop;
+	scrollLeft = chr.scrollLeft;
+	curr_Img.style.width = w * chg;
+	curr_Img.style.height = h * chg;
+	
+		
+	chr.scrollTop = (pos_y + scrollTop ) * chg - pos_y; 
+	chr.scrollLeft = (pos_x + scrollLeft) * chg - pos_x;
+
+
+	w = curr_Img1.width;
+	h = curr_Img1.height;
+	curr_Img1.style.width = w*chg;
+	curr_Img1.style.height = h * chg;
+	scrollLeft = chravg.scrollLeft;
+	chravg.scrollLeft =  (pos_x + scrollLeft) * chg - pos_x;
+
+	// Use this for debugging
+   	document.pointform.form_x.value = chr.scrollTop;
+    document.pointform.form_y.value = pos_y;
+   	document.pointform.form_w.value = chr.scrollLeft;
+    document.pointform.form_u.value = pos_x;
+}
+
+
+function zoomoutchr(event) {
+	// this function increases the size of the image
+	curr_Img = img0;
+	curr_Img1 = img2;
+
+	if ( state == 0 ) {
+		return;
+	}
+	state--;
+	
+	w = curr_Img.width;
+	h = curr_Img.height;
+
+	pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("chr").offsetLeft;
+	pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("chr").offsetTop;
+
+	scrollTop = chr.scrollTop;
+	scrollLeft = chr.scrollLeft;
+	curr_Img.style.width = w / chg;
+	curr_Img.style.height = h / chg;
+	
+		
+	chr.scrollTop = (pos_y + scrollTop ) / chg - pos_y; 
+	chr.scrollLeft = (pos_x + scrollLeft) / chg - pos_x;
+
+	w = curr_Img1.width;
+	h = curr_Img1.height;
+	scrollLeft = chravg.scrollLeft;
+	curr_Img1.style.width = w / chg;
+	curr_Img1.style.height = h /chg;
+	chravg.scrollLeft = (pos_x + scrollLeft) / chg - pos_x;
+
+	
+	// Debugging
+   	document.pointform.form_x.value = chr.scrollTop;
+    document.pointform.form_y.value = pos_y;
+   	document.pointform.form_w.value = chr.scrollLeft;
+    document.pointform.form_u.value = pos_x;
+}
+
+function orig_size(orig_Img) {
+	// this function returns the image to original size
+	if (state == 0) {
+		// do nothing if image wasn't clicked on
+	} else {
+		curr_Img.width = orig_w;
+		curr_Img.height = orig_h;
+		state = 0;
+	}
+}
+
+</script>
+
+</head>
+<body>
+
+<center>
+<H2>Average ancestries</H2>
+</center>
+<center>
+<div style="position : relative; left: 0px; top: 0px; width:1000px; overflow: auto; " id="avg" >
+<img id="img1" src="tmp/avg.png" style="position : relative; left: 0px; top: 0px; height:100px; width:1000px" onclick="zoomavg(event)">
+</div>
+<button name="avgbutton" onclick="zoomoutavg(event)">Zoomout </button>
+</center>
+<br>
+<hr>
+<center>
+<H2>Locus-specific average ancestries</H2>
+</center>
+<div id="chravg" style = " position : relative; left: 0px; top: 0px;  overflow: auto; width: 750px;" onscroll="scroll()" >
+<img  class="chravg" id="img2"  src="tmp/markeravg.png" style="position : relative; left: 0px; top: 0px; "   >
+</div>
+<br>
+<center>
+<H2>Locus-specific ancestries</H2>
+</center>
+<div id="chr" style = " position : relative; left: 0px; top: 0px;  overflow: auto; width: 750px; height: 300px " onscroll="scroll()" >
+<img  class="chr" id="img0"  src="tmp/chr.png" style="position : relative; left: 0px; top: 0px;" onclick="zoomchr(event)"  >
+</div>
+<center>
+<button name="chrbutton" onclick="zoomoutchr(event)">Zoomout </button>
+</center>
+<!--
+<form name="pointform" method="post" type="hidden">
+You pointed on x = <input type="text" name="form_x" size="4" /> - y = <input type="text" name="form_y" size="4" />
+You pointed on x = <input type="text" name="form_w" size="4" /> - y = <input type="text" name="form_u" size="4" />
+</form>
+-->
+</body></html>

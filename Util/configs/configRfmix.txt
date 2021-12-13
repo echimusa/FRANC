@@ -1,0 +1,37 @@
+for(Chr in %d:%d) 
+{ 
+%s = read.table(paste("%s/%s/%s/%d/%schr%d_bgl.phased",sep=""), header=T, stringsAsFactors=F) 
+%s = %s[, -c(1:2)]				##create a list from -1 to -2.
+%sT = t(%s)						##create a matrix from the list and arrange by row same as this	
+num%s = nrow(%sT)				##number of rows
+
+%s
+
+##combine the rows of the popn matrices in the order as they appear.
+all = rbind(%sT, %s)
+
+##to binarise means to convert a real matrix into a binary matrix{the entries are (0,1)}'
+binarize = function(snp){
+	asFactor = factor(snp)
+	allele1 = levels(asFactor)[1]
+	allele2 = levels(asFactor)[2]
+	result = rep(NA, length(snp))
+	result[snp == allele1] = "0"
+	result[snp == allele2] = "1"
+	return(result)
+}
+
+all01 = apply(all, 2, binarize)
+##transpose back
+alleles = t(all01)
+
+write.table(alleles, paste("%s/%s/%s/%d/%s_alleles.%d.txt", sep=""), quote=F, sep="", col.names=F, row.names=F)
+
+##Classes file manipulation
+%s
+classesM = matrix(classes,nrow=1)
+write.table(classesM,"%s/%s/%s/classes.txt",quote=F,row.names=F,col.names=F)
+}
+
+
+

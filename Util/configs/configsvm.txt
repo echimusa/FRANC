@@ -1,0 +1,23 @@
+#"""This part is a code to create the configuration file for SUPPORTMIX"""
+[data location]
+basedatadir = %s/%s/%s/%d/data%d
+
+[input]
+admixed = %s/%s/%s/%d/data%d/tpedData/%s.%d.tped.gz
+%s
+
+[plot options]
+#plot = True
+#rgb = #ff0000,#00ff00,#0000ff,#ff00ff,#ffff00
+#labels = %s
+
+[parameters]
+savefile = %s/%s/%s/%d/output/%s.%d
+window = %d
+chromosome = %d
+
+#mapdir = data%d/hapmap2Subset
+mapdir = %s/%s/%s/%d/data%d/hapmap2Subset
+generations = %d
+
+
